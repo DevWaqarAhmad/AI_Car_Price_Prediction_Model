@@ -2,6 +2,8 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
+from sklearn.model_selection import train_test_split
+
 
 
 df= pd.read_csv("data/car_price_data.csv")
@@ -45,3 +47,18 @@ for col in df.select_dtypes(include=['object']).columns:
 
 print("✅ Encoding completed successfully!")
 print(df.dtypes.head())  
+
+
+#=================== SPLIT DATA TEST AND TRAIN =================
+
+X = df.drop('price', axis=1)
+
+# Target column (output)
+y = df['price']
+
+# Split into 80% train and 20% test
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+print("✅ Data split completed!")
+print("Training samples:", X_train.shape)
+print("Testing samples:", X_test.shape)
